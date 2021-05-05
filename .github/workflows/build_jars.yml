@@ -35,8 +35,8 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          cp editor/target/editor-*.jar ./
-          cp server/target/server-*.jar ./
+          cp editor/target/editor-*-*.jar ./
+          cp server/target/server-*-*.jar ./
           git add -f ./*.jar
           git commit -m "Update Jars (${{ matrix.target }}) by workflow"
 

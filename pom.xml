@@ -15,6 +15,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
+    <lwjgl.version>3.2.3</lwjgl.version>
   </properties>
 
   <dependencies>
@@ -37,6 +38,38 @@
         <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <profiles>
+    <profile>
+      <id>linux-amd64</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <game.natives.target>linux</game.natives.target>
+      </properties>
+    </profile>
+    <profile>
+      <id>macos-amd64</id>
+      <properties>
+        <game.natives.target>macos</game.natives.target>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>org.lwjgl</groupId>
+          <artifactId>lwjgl-vulkan</artifactId>
+          <version>${lwjgl.version}</version>
+          <classifier>natives-macos</classifier>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>windows-amd64</id>
+      <properties>
+        <game.natives.target>windows</game.natives.target>
+      </properties>
+    </profile>
+  </profiles>
 
   <modules>
     <module>core</module>

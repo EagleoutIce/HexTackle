@@ -16,35 +16,7 @@
   </parent>
 
   <properties>
-    <lwjgl.version>3.2.3</lwjgl.version>
   </properties>
-  <profiles>
-    <profile>
-      <id>linux-amd64</id>
-      <properties>
-        <lwjgl.natives>linux</lwjgl.natives>
-      </properties>
-    </profile>
-    <profile>
-      <id>macos-amd64</id>
-      <properties>
-        <lwjgl.natives>macos</lwjgl.natives>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.lwjgl</groupId>
-          <artifactId>lwjgl-vulkan</artifactId>
-          <classifier>natives-macos</classifier>
-        </dependency>
-      </dependencies>
-    </profile>
-    <profile>
-      <id>windows-amd64</id>
-      <properties>
-        <lwjgl.natives>windows</lwjgl.natives>
-      </properties>
-    </profile>
-  </profiles>
 
   <dependencyManagement>
     <dependencies>
@@ -103,70 +75,62 @@
     <dependency>
       <groupId>org.lwjgl</groupId>
       <artifactId>lwjgl</artifactId>
-      <classifier>natives-${lwjgl.natives}</classifier>
+      <classifier>natives-${game.natives.target}</classifier>
     </dependency>
     <dependency>
       <groupId>org.lwjgl</groupId>
       <artifactId>lwjgl-assimp</artifactId>
-      <classifier>natives-${lwjgl.natives}</classifier>
+      <classifier>natives-${game.natives.target}</classifier>
     </dependency>
     <dependency>
       <groupId>org.lwjgl</groupId>
       <artifactId>lwjgl-bgfx</artifactId>
-      <classifier>natives-${lwjgl.natives}</classifier>
+      <classifier>natives-${game.natives.target}</classifier>
     </dependency>
     <dependency>
       <groupId>org.lwjgl</groupId>
       <artifactId>lwjgl-glfw</artifactId>
-      <classifier>natives-${lwjgl.natives}</classifier>
+      <classifier>natives-${game.natives.target}</classifier>
     </dependency>
     <dependency>
       <groupId>org.lwjgl</groupId>
       <artifactId>lwjgl-nanovg</artifactId>
-      <classifier>natives-${lwjgl.natives}</classifier>
+      <classifier>natives-${game.natives.target}</classifier>
     </dependency>
     <dependency>
       <groupId>org.lwjgl</groupId>
       <artifactId>lwjgl-nuklear</artifactId>
-      <classifier>natives-${lwjgl.natives}</classifier>
+      <classifier>natives-${game.natives.target}</classifier>
     </dependency>
     <dependency>
       <groupId>org.lwjgl</groupId>
       <artifactId>lwjgl-openal</artifactId>
-      <classifier>natives-${lwjgl.natives}</classifier>
+      <classifier>natives-${game.natives.target}</classifier>
     </dependency>
     <dependency>
       <groupId>org.lwjgl</groupId>
       <artifactId>lwjgl-opengl</artifactId>
-      <classifier>natives-${lwjgl.natives}</classifier>
+      <classifier>natives-${game.natives.target}</classifier>
     </dependency>
     <dependency>
       <groupId>org.lwjgl</groupId>
       <artifactId>lwjgl-par</artifactId>
-      <classifier>natives-${lwjgl.natives}</classifier>
+      <classifier>natives-${game.natives.target}</classifier>
     </dependency>
     <dependency>
       <groupId>org.lwjgl</groupId>
       <artifactId>lwjgl-stb</artifactId>
-      <classifier>natives-${lwjgl.natives}</classifier>
+      <classifier>natives-${game.natives.target}</classifier>
     </dependency>
   </dependencies>
 
   <build>
-    <finalName>engine-${version}-${lwjgl.natives}</finalName>
+    <finalName>engine-${version}-${game.natives.target}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
         <version>3.2.0</version>
-        <configuration>
-          <transformers>
-              <transformer
-                      implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>de.flojo.Main</mainClass>
-              </transformer>
-          </transformers>
-      </configuration>
         <executions>
             <execution>
                 <id>pack-engine</id>
