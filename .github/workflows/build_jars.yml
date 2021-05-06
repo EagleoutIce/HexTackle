@@ -25,14 +25,12 @@ jobs:
 
       - name: Build all the jars
         run: |
-          mvn install -P linux-amd64
-          mvn install -P macos-amd64
-          mvn install -P windows-amd64
+          mvn install
       - name: Commit jar to build branch
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          cp editor/target/editor-*-*.jar ./
+          cp editor/target/editor-*.jar ./
           cp server/target/server-*.jar ./
           git add -f ./*.jar
           git commit -m "Update Jars by workflow"

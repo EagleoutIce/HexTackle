@@ -3,7 +3,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>de.flojo</groupId>
   <artifactId>engine</artifactId>
   <version>1.0</version>
 
@@ -18,109 +17,28 @@
   <properties>
   </properties>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.lwjgl</groupId>
-        <artifactId>lwjgl-bom</artifactId>
-        <version>${lwjgl.version}</version>
-        <scope>import</scope>
-        <type>pom</type>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
   <dependencies>
     <dependency>
-      <groupId>de.flojo</groupId>
-      <artifactId>core</artifactId>
-      <version>1.0</version>
+      <groupId>com.badlogicgames.gdx</groupId>
+      <artifactId>gdx-backend-lwjgl3</artifactId>
+      <version>${libgdx.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl</artifactId>
+      <groupId>com.badlogicgames.gdx</groupId>
+      <artifactId>gdx-backend-headless</artifactId>
+      <version>${libgdx.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-glfw</artifactId>
+      <groupId>com.badlogicgames.gdx</groupId>
+      <artifactId>gdx-platform</artifactId>
+      <version>${libgdx.version}</version>
+      <classifier>natives-desktop</classifier>
     </dependency>
     <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-nanovg</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-nuklear</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-openal</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-opengl</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-par</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-stb</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-vulkan</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl</artifactId>
-      <classifier>natives-${game.natives.target}</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-assimp</artifactId>
-      <classifier>natives-${game.natives.target}</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-bgfx</artifactId>
-      <classifier>natives-${game.natives.target}</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-glfw</artifactId>
-      <classifier>natives-${game.natives.target}</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-nanovg</artifactId>
-      <classifier>natives-${game.natives.target}</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-nuklear</artifactId>
-      <classifier>natives-${game.natives.target}</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-openal</artifactId>
-      <classifier>natives-${game.natives.target}</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-opengl</artifactId>
-      <classifier>natives-${game.natives.target}</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-par</artifactId>
-      <classifier>natives-${game.natives.target}</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl</groupId>
-      <artifactId>lwjgl-stb</artifactId>
-      <classifier>natives-${game.natives.target}</classifier>
+      <groupId>com.badlogicgames.gdx</groupId>
+      <artifactId>gdx</artifactId>
+      <version>${libgdx.version}</version>
     </dependency>
   </dependencies>
 
