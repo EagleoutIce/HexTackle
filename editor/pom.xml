@@ -26,6 +26,12 @@
       <artifactId>engine</artifactId>
       <version>1.0</version>
     </dependency>
+      <dependency>
+          <groupId>de.flojo</groupId>
+          <artifactId>core</artifactId>
+          <version>1.0</version>
+          <scope>compile</scope>
+      </dependency>
   </dependencies>
 
   <build>
