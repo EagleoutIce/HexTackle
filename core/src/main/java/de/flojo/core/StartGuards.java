@@ -11,14 +11,16 @@ import java.util.Arrays;
 @Slf4j
 public class StartGuards {
 
-    private StartGuards() {}
-
     public static final String MACOS_GUARD = "-guard-macos";
+
+    private StartGuards() {
+    }
 
     // true if restarted
     public static boolean guardMacOs(String[] args) {
         log.info("Starting with guard for MacOs");
-        if(OperatingSystem.getOperatingSystemType().equals(OperatingSystemType.MAC_OS) && !hasGuard(args, MACOS_GUARD)) {
+        if (OperatingSystem.getOperatingSystemType().equals(OperatingSystemType.MAC_OS) && !hasGuard(args,
+                                                                                                     MACOS_GUARD)) {
             try {
                 log.info("Restarting!");
                 restartWith("-XstartOnFirstThread", args, MACOS_GUARD);
@@ -31,7 +33,8 @@ public class StartGuards {
         return false;
     }
 
-    private static void restartWith(String extraPre, String[] args, String extraArg) throws URISyntaxException, IOException {
+    private static void restartWith(String extraPre, String[] args,
+                                    String extraArg) throws URISyntaxException, IOException {
         final var currentPath = StartGuards.class
                 .getProtectionDomain()
                 .getCodeSource().getLocation()
@@ -39,7 +42,7 @@ public class StartGuards {
                 .replace('/', File.separator.charAt(0));
         final var command = new ArrayList<String>();
         command.add("java");
-        if(!extraPre.isBlank())
+        if (!extraPre.isBlank())
             command.add(extraPre);
         command.add("-jar");
         command.add(currentPath);

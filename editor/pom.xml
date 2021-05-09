@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>editor</artifactId>
-  <version>1.0</version>
-
-  <name>editor</name>
-
-  <parent>
-    <groupId>de.flojo</groupId>
-    <artifactId>hextackle</artifactId>
+    <artifactId>editor</artifactId>
     <version>1.0</version>
-  </parent>
 
-  <properties>
+    <name>editor</name>
 
-  </properties>
+    <parent>
+        <groupId>de.flojo</groupId>
+        <artifactId>hextackle</artifactId>
+        <version>1.0</version>
+    </parent>
 
-  <dependencies>
-    <dependency>
-      <groupId>de.flojo</groupId>
-      <artifactId>engine</artifactId>
-      <version>1.0</version>
-    </dependency>
-      <dependency>
-          <groupId>de.flojo</groupId>
-          <artifactId>core</artifactId>
-          <version>1.0</version>
-          <scope>compile</scope>
-      </dependency>
-  </dependencies>
+    <properties>
 
-  <build>
-    <finalName>editor-${version}</finalName>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>3.2.0</version>
-        <configuration>
-          <transformers>
-              <transformer
-                      implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>de.flojo.Main</mainClass>
-              </transformer>
-          </transformers>
-      </configuration>
-        <executions>
-            <execution>
-                <id>pack-editor</id>
-                <phase>package</phase>
-                <goals>
-                    <goal>shade</goal>
-                </goals>
-            </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.flojo</groupId>
+            <artifactId>engine</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>de.flojo</groupId>
+            <artifactId>core</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>editor-${version}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <transformers>
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>de.flojo.Main</mainClass>
+                        </transformer>
+                    </transformers>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>pack-editor</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
