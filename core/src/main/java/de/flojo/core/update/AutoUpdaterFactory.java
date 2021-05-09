@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AutoUpdaterFactory implements IFactory<AbstractAutoUpdater> {
 
-    private static final String JAR_PATH = AutoUpdaterFactory.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+    public static final String JAR_PATH = AutoUpdaterFactory.class.getProtectionDomain().getCodeSource().getLocation().getPath();
     private static final String JAR_END = ".jar";
 
     public AutoUpdaterFactory() {

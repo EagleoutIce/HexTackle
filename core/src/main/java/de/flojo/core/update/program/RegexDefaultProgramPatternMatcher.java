@@ -13,13 +13,13 @@ public class RegexDefaultProgramPatternMatcher implements IAmProgramPatternMatch
     public ProgramData match(final CharSequence path) {
         final var regexMatch = PROGRAM_NAME.matcher(path);
         if(!regexMatch.matches()) {
-            log.error("Unable to match regex \"{}\" in \"{}\".", PROGRAM_NAME, path);
+            log.debug("Unable to match regex \"{}\" in \"{}\".", PROGRAM_NAME, path);
             return ProgramData.INVALID;
         }
         final ProgramVersion programVersion;
         try {
             programVersion = new ProgramVersion(regexMatch.group("major"), regexMatch.group("minor"), regexMatch.group("patch"));
-        } catch (ProgramVersionIdentificationException e) {
+        } catch (ProgramVersionIdentificationException ignored) {
             return ProgramData.INVALID;
         }
         final var programData = new ProgramData(regexMatch.group("name"), programVersion);

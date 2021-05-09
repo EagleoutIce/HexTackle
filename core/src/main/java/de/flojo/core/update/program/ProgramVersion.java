@@ -10,7 +10,6 @@ public class ProgramVersion {
     private final int minor;
     private final int patch;
 
-
     private static int tryConvert(String tag, String base) throws ProgramVersionIdentificationException {
         try {
             return Integer.parseInt(base);
@@ -41,5 +40,16 @@ public class ProgramVersion {
 
     public int getPatch() {
         return patch;
+    }
+
+    public boolean isNewerThan(ProgramVersion other){
+        if(major > other.major) {
+            return true;
+        } else if (major == other.major) {
+            if (minor > other.minor)
+                return true;
+            return patch > other.patch;
+        }
+        return false;
     }
 }

@@ -12,6 +12,10 @@ public class ProgramData {
         this.version = version;
     }
 
+    public static boolean isValid(final ProgramData data) {
+        return data != null && data.baseName != null && data.version != null;
+    }
+
     public String getBaseName() {
         return baseName;
     }

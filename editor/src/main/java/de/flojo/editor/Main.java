@@ -13,9 +13,11 @@ import lombok.extern.slf4j.Slf4j;
 public class Main extends ApplicationAdapter {
 
     public static void main(String[] args) {
-        if (StartGuards.guardMacOs(args))
+        if (StartGuards.guardMacOs(args)) {
             return;
+        }
         AbstractAutoUpdater updater = new AutoUpdaterFactory().create();
+
         final var config = new Lwjgl3ApplicationConfiguration();
         config.setTitle("HexTackle - Editor");
         log.info("Starting editor ({})", config);
