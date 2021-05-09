@@ -1,10 +1,12 @@
 package de.flojo.core.update.program;
 
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 @ToString
 @Slf4j
+@EqualsAndHashCode
 public class ProgramVersion {
     private final int major;
     private final int minor;

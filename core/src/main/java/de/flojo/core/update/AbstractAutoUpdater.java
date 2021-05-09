@@ -1,6 +1,6 @@
 package de.flojo.core.update;
 
-import de.flojo.core.update.fetchers.IFetchUpdate;
+import de.flojo.core.update.downloaders.IDownloadUpdate;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -19,6 +19,9 @@ public abstract class AbstractAutoUpdater {
         return newVersionState;
     }
 
+    /// Start fetching for any updates
+    public abstract void fetch();
+
     protected void updateVersionState(NewVersionState newVersionState){
         log.debug("Got Update for new version: {}", newVersionState);
         for (final var listener: listeners) {
@@ -34,7 +37,5 @@ public abstract class AbstractAutoUpdater {
         return  listeners.remove(listener);
     }
 
-    public abstract IUpdateProgress update();
-
-    public abstract IFetchUpdate fetch() throws IOException;
+    public abstract IDownloadUpdate getDownloader(final boolean force) throws IOException;
 }

@@ -1,5 +1,6 @@
 package de.flojo.core.update.program;
 
+import de.flojo.core.update.IDescribePatternError;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.regex.Pattern;
@@ -10,10 +11,9 @@ public class RegexDefaultProgramPatternMatcher implements IAmProgramPatternMatch
     private static final Pattern PROGRAM_NAME = Pattern.compile("(.*/)?(?<name>[^-]*)-(?<major>\\d*)(\\.(?<minor>\\d*)(\\.(?<patch>\\d*))?)?\\.jar");
 
     @Override
-    public ProgramData match(final CharSequence path) {
+    public ProgramData match(final CharSequence path, IDescribePatternError onMatchError) {
         final var regexMatch = PROGRAM_NAME.matcher(path);
         if(!regexMatch.matches()) {
-            log.debug("Unable to match regex \"{}\" in \"{}\".", PROGRAM_NAME, path);
             return ProgramData.INVALID;
         }
         final ProgramVersion programVersion;

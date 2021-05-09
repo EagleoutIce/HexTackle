@@ -1,20 +1,20 @@
 package de.flojo.core.update;
 
-import de.flojo.core.update.fetchers.IFetchUpdate;
+import de.flojo.core.update.downloaders.IDownloadUpdate;
 
-public class VoidAutoUpdater extends AbstractAutoUpdater{
+public class VoidAutoUpdater extends AbstractAutoUpdater {
 
     public VoidAutoUpdater() {
         updateVersionState(NewVersionState.DISABLED);
     }
 
     @Override
-    public IUpdateProgress update() {
-        throw new UnsupportedOperationException("Update is not available on an void updater.");
+    public void fetch() {
+        // Do nothing on fetch
     }
 
     @Override
-    public IFetchUpdate fetch() {
-        throw new UnsupportedOperationException("Fetch is not available on an void updater.");
+    public IDownloadUpdate getDownloader(final boolean force) {
+        throw new UnsupportedOperationException("Download is not available on an void updater.");
     }
 }
