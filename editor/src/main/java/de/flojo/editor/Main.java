@@ -1,4 +1,4 @@
-package de.flojo;
+package de.flojo.editor;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
