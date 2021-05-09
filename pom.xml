@@ -6,7 +6,7 @@
 
     <groupId>de.flojo</groupId>
     <artifactId>hextackle</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
 
     <name>HexTackle</name>
     <packaging>pom</packaging>

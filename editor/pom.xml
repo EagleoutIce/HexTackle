@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>editor</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
 
     <name>editor</name>
 
     <parent>
         <groupId>de.flojo</groupId>
         <artifactId>hextackle</artifactId>
-        <version>1.0</version>
+        <version>1.0.0</version>
     </parent>
 
     <properties>
@@ -23,17 +23,12 @@
         <dependency>
             <groupId>de.flojo</groupId>
             <artifactId>engine</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.akathist.maven.plugins.launch4j</groupId>
-            <artifactId>launch4j-maven-plugin</artifactId>
-            <version>2.1.1</version>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>editor-${version}</finalName>
+        <finalName>editor-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -54,42 +49,6 @@
                         <goals>
                             <goal>shade</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.akathist.maven.plugins.launch4j</groupId>
-                <artifactId>launch4j-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>l4j-clui</id>
-                        <phase>package</phase>
-                        <goals><goal>launch4j</goal></goals>
-                        <configuration>
-                            <headerType>console</headerType>
-                            <outfile>target/editor-${version}.exe</outfile>
-                            <jar>target/editor-${version}.jar</jar>
-                            <errTitle>editor-${version}</errTitle>
-                            <classPath>
-                                <mainClass>de.flojo.editor.Main</mainClass>
-                                <addDependencies>true</addDependencies>
-                                <preCp>anything</preCp>
-                            </classPath>
-                            <jre>
-                                <minVersion>1.11.0</minVersion>
-                            </jre>
-                            <versionInfo>
-                                <fileVersion>1.0.0.0</fileVersion>
-                                <txtFileVersion>${version}</txtFileVersion>
-                                <fileDescription>This is the description</fileDescription>
-                                <copyright>Copyright to be identified</copyright>
-                                <productVersion>1.0.0.0</productVersion>
-                                <txtProductVersion>${version}</txtProductVersion>
-                                <productName>HexTackle-Editor</productName>
-                                <internalName>hextackle.editor</internalName>
-                                <originalFilename>original.exe</originalFilename>
-                            </versionInfo>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
