@@ -1,7 +1,6 @@
 package de.flojo.core;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,8 +8,8 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+@Slf4j
 public class StartGuards {
-    private static final Logger logger = LoggerFactory.getLogger(StartGuards.class);
 
     private StartGuards() {}
 
@@ -18,13 +17,13 @@ public class StartGuards {
 
     // true if restarted
     public static boolean guardMacOs(String[] args) {
-        logger.info("Starting with guard for MacOs");
+        log.info("Starting with guard for MacOs");
         if(OperatingSystem.getOperatingSystemType().equals(OperatingSystemType.MAC_OS) && !hasGuard(args, MACOS_GUARD)) {
             try {
-                logger.info("Restarting!");
+                log.info("Restarting!");
                 restartWith("-XstartOnFirstThread", args, MACOS_GUARD);
             } catch (URISyntaxException | IOException e) {
-                logger.error("MacOS guard failed", e);
+                log.error("MacOS guard failed", e);
                 return false;
             }
             return true;
@@ -46,7 +45,7 @@ public class StartGuards {
         command.add(currentPath);
         command.addAll(Arrays.asList(args));
         command.add(extraArg);
-        logger.info("Starting with: {}", command);
+        log.info("Starting with: {}", command);
         final var processBuilder = new ProcessBuilder(command);
         processBuilder.start();
     }

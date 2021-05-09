@@ -5,14 +5,17 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.utils.ScreenUtils;
 import de.flojo.core.StartGuards;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Main extends ApplicationAdapter {
 
     public static void main(String[] args) {
         if(StartGuards.guardMacOs(args))
             return;
         final var config = new Lwjgl3ApplicationConfiguration();
-        config.setTitle("123");
+        config.setTitle("HexTackle - Editor");
+        log.info("Starting editor ({})", config);
         new Lwjgl3Application(new Main(), config);
     }
 
