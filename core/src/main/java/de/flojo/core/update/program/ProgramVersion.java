@@ -12,6 +12,17 @@ public class ProgramVersion {
     private final int minor;
     private final int patch;
 
+    public ProgramVersion(final String major, final String minor,
+                          final String patch) throws ProgramVersionIdentificationException {
+        this(tryConvert("major", major), tryConvert("minor", minor), tryConvert("patch", patch));
+    }
+
+    public ProgramVersion(final int major, final int minor, final int patch) {
+        this.major = major;
+        this.minor = minor;
+        this.patch = patch;
+    }
+
     private static int tryConvert(String tag, String base) throws ProgramVersionIdentificationException {
         try {
             return Integer.parseInt(base);
@@ -20,16 +31,6 @@ public class ProgramVersion {
             log.error("Supplied with error message: ", numberFormatException);
             throw new ProgramVersionIdentificationException("For tag " + tag + " and base " + base);
         }
-    }
-
-    public ProgramVersion(final String major, final String minor, final String patch) throws ProgramVersionIdentificationException {
-        this(tryConvert("major", major), tryConvert("minor", minor), tryConvert("patch", patch));
-    }
-
-    public ProgramVersion(final int major, final int minor, final int patch) {
-        this.major = major;
-        this.minor = minor;
-        this.patch = patch;
     }
 
     public int getMajor() {
@@ -44,8 +45,8 @@ public class ProgramVersion {
         return patch;
     }
 
-    public boolean isNewerThan(ProgramVersion other){
-        if(major > other.major) {
+    public boolean isNewerThan(ProgramVersion other) {
+        if (major > other.major) {
             return true;
         } else if (major == other.major) {
             if (minor > other.minor)

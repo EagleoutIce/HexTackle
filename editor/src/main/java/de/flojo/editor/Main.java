@@ -35,7 +35,8 @@ public class Main extends ApplicationAdapter {
     private static void registerVersionAutoUpdateListener(final AbstractAutoUpdater updater) {
         updater.registerNewVersionListener((newVersionState -> {
             // warning: potential downgrade for same!
-            if(newVersionState.equals(NewVersionState.PRESENT) || newVersionState.equals(NewVersionState.SAME_PRESENT)) {
+            if (newVersionState.equals(NewVersionState.PRESENT) || newVersionState.equals(
+                    NewVersionState.SAME_PRESENT)) {
                 try {
                     IDownloadUpdate downloader = updater.getDownloader(true);
                     log.info("Forcing update to: {}", AutoUpdaterFactory.JAR_PATH);

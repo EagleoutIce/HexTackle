@@ -11,9 +11,8 @@ import java.util.List;
 @Slf4j
 public abstract class AbstractAutoUpdater {
 
-    protected NewVersionState newVersionState = NewVersionState.UNKNOWN;
-
     private final List<IListenToNewVersionState> listeners = Collections.synchronizedList(new ArrayList<>());
+    protected NewVersionState newVersionState = NewVersionState.UNKNOWN;
 
     public NewVersionState getNewVersionState() {
         return newVersionState;
@@ -22,9 +21,9 @@ public abstract class AbstractAutoUpdater {
     /// Start fetching for any updates
     public abstract void fetch();
 
-    protected void updateVersionState(NewVersionState newVersionState){
+    protected void updateVersionState(NewVersionState newVersionState) {
         log.debug("Got Update for new version: {}", newVersionState);
-        for (final var listener: listeners) {
+        for (final var listener : listeners) {
             listener.update(newVersionState);
         }
         this.newVersionState = newVersionState;
@@ -33,8 +32,9 @@ public abstract class AbstractAutoUpdater {
     public void registerNewVersionListener(IListenToNewVersionState listener) {
         listeners.add(listener);
     }
+
     public boolean deleteNewVersionListener(IListenToNewVersionState listener) {
-        return  listeners.remove(listener);
+        return listeners.remove(listener);
     }
 
     public abstract IDownloadUpdate getDownloader(final boolean force) throws IOException;

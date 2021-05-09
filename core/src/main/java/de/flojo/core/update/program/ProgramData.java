@@ -4,6 +4,7 @@ import lombok.ToString;
 
 @ToString
 public class ProgramData {
+    public static final ProgramData INVALID = new ProgramData(null, null);
     private final String baseName;
     private final ProgramVersion version;
 
@@ -23,6 +24,4 @@ public class ProgramData {
     public ProgramVersion getVersion() {
         return version;
     }
-
-    public static final ProgramData INVALID = new ProgramData(null, null);
 }
