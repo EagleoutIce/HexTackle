@@ -1,4 +1,4 @@
-package de.flojo.core;
+package de.flojo.core.os;
 
 import java.util.Locale;
 

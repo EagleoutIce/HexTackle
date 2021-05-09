@@ -4,7 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.utils.ScreenUtils;
-import de.flojo.core.StartGuards;
+import de.flojo.core.os.StartGuards;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

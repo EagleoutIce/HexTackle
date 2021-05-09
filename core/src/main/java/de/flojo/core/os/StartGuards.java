@@ -1,4 +1,4 @@
-package de.flojo.core;
+package de.flojo.core.os;
 
 import lombok.extern.slf4j.Slf4j;
 
