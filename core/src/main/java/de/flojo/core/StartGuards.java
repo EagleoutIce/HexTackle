@@ -13,7 +13,7 @@ public class StartGuards {
 
     // true if restarted
     public static boolean guardMacOs(String[] args) {
-        if(OperatingSystem.getOperatingSystemType().equals(OperatingSystemType.MacOS) && !hasGuard(args, MACOS_GUARD)) {
+        if(OperatingSystem.getOperatingSystemType().equals(OperatingSystemType.MAC_OS) && !hasGuard(args, MACOS_GUARD)) {
             try {
                 System.out.println("Restarting!");
                 restartWith("-XstartOnFirstThread", args, MACOS_GUARD);

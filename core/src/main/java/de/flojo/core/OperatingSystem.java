@@ -21,13 +21,13 @@ public class OperatingSystem {
     private static OperatingSystemType analyzeOperatingSystemType() {
         final var operatingSystemString = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
         if (operatingSystemString.contains("mac") || operatingSystemString.contains("darwin")) {
-            return OperatingSystemType.MacOS;
+            return OperatingSystemType.MAC_OS;
         } else if (operatingSystemString.contains("win")) {
-            return OperatingSystemType.Windows;
+            return OperatingSystemType.WINDOWS;
         } else if (operatingSystemString.contains("nux")) {
-            return OperatingSystemType.Linux;
+            return OperatingSystemType.LINUX;
         } else {
-            return OperatingSystemType.Unknown;
+            return OperatingSystemType.UNKNOWN;
         }
     }
 }
