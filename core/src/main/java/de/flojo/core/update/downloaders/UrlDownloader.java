@@ -9,20 +9,18 @@ import java.net.URL;
 
 @Slf4j
 public class UrlDownloader implements IDownloadUpdate {
-    final String source;
+	final String source;
 
-    public UrlDownloader(final String source) {
-        this.source = source;
-    }
+	public UrlDownloader(final String source) {
+		this.source = source;
+	}
 
 
-    @SneakyThrows
-    @Override
-    public void downloadTo(final String targetPath) {
-        log.info("Download from: \"{}\" to: \"{}\"", source, targetPath);
-        FileUtils.copyURLToFile(
-                new URL(source),
-                new File(targetPath)
-        );
-    }
+	@SneakyThrows
+	@Override
+	public void downloadTo(final String targetPath) {
+		log.info("Download from: \"{}\" to: \"{}\"", source, targetPath);
+		FileUtils.copyURLToFile(new URL(source), new File(targetPath)
+		);
+	}
 }
