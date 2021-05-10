@@ -1,7 +1,5 @@
 package de.flojo.core.logging;
 
-import javax.naming.OperationNotSupportedException;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Locale;
 import java.util.function.Consumer;
@@ -48,18 +46,6 @@ public class ConsumerPrintStreamBridge extends PrintStream {
 
 	@Override
 	public void write(final byte[] buf, final int off, final int len) {
-		// TODO
-		throw new UnsupportedOperationException("Currently not implemented");
-	}
-
-	@Override
-	public void write(final byte[] buf) {
-		// TODO
-		throw new UnsupportedOperationException("Currently not implemented");
-	}
-
-	@Override
-	public void writeBytes(final byte[] buf) {
 		// TODO
 		throw new UnsupportedOperationException("Currently not implemented");
 	}
