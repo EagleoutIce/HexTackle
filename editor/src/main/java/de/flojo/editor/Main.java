@@ -44,8 +44,7 @@ public class Main extends ApplicationAdapter {
 		config.useOpenGL3(true, 3, 2);
 		config.enableGLDebugOutput(true, new ConsumerPrintStreamBridge(log::debug));
 		log.info("Starting editor ({})", config);
-		final var application = new Lwjgl3Application(new Main(), config);
-		log.debug("Application running (v{})", application.getVersion());
+		new Lwjgl3Application(new Main(), config);
 	}
 
 	private static void registerVersionAutoUpdateListener(final AbstractAutoUpdater updater) {
