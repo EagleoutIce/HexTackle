@@ -11,7 +11,10 @@ import de.flojo.core.update.NewVersionState;
 import de.flojo.core.update.downloaders.IDownloadUpdate;
 import lombok.extern.slf4j.Slf4j;
 
+import java.awt.Color;
+import java.awt.color.ColorSpace;
 import java.io.IOException;
+import java.util.Random;
 
 @Slf4j
 public class Main extends ApplicationAdapter {
@@ -48,9 +51,16 @@ public class Main extends ApplicationAdapter {
         }));
     }
 
+    int v = 0;
+    long last = System.currentTimeMillis();
+    Color lastColor = new Color(0, 0, 0);
     @Override
     public void render() {
         super.render();
-        ScreenUtils.clear(0, 0, 0.2f, 1);
+        if(System.currentTimeMillis() - last > 14) {
+            v = Math.floorMod(v + 1, 256);
+            lastColor = new Color(Color.HSBtoRGB(v/255f, .75f, .75f));
+        }
+        ScreenUtils.clear(lastColor.getRed()/255f, lastColor.getGreen()/255f, lastColor.getBlue()/255f, 1f);
     }
 }
