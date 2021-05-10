@@ -49,7 +49,8 @@ public class Main extends ApplicationAdapter {
 					log.info("Forcing update to: {} in 2s", AutoUpdaterFactory.JAR_PATH);
 					Thread.sleep(2000);
 					// this should be buffered/changed too
-					downloader.downloadTo(Path.of(AutoUpdaterFactory.JAR_PATH), newVersionState.equals(NewVersionState.PRESENT));
+					downloader.downloadTo(Path.of(AutoUpdaterFactory.JAR_PATH),
+										  newVersionState.equals(NewVersionState.PRESENT));
 				} catch (IOException e) {
 					log.error("Unable to retrieve downloader new Jar. ", e);
 				} catch (InterruptedException e) {

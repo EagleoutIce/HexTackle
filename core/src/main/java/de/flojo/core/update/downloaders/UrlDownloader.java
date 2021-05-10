@@ -4,7 +4,6 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 
-import java.io.File;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,8 +24,8 @@ public class UrlDownloader implements IDownloadUpdate {
 		log.info("Download from: \"{}\" to: \"{}\"", source, targetPath);
 		final var basenameSource = Path.of(source).getFileName().toString();
 		log.debug("Identified basename \"{}\"", basenameSource);
-		FileUtils.copyURLToFile(new URL(source), Path.of(targetPath,basenameSource).toFile());
-		if(erasePrevious) {
+		FileUtils.copyURLToFile(new URL(source), Path.of(targetPath, basenameSource).toFile());
+		if (erasePrevious) {
 			log.info("Deleting old state...");
 			Files.delete(fullTargetPath);
 		}
