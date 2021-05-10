@@ -45,11 +45,14 @@ public class Main extends ApplicationAdapter {
 			if (newVersionState.equals(NewVersionState.PRESENT) || newVersionState.equals(
 					NewVersionState.SAME_PRESENT)) {
 				try {
-					IDownloadUpdate downloader = updater.getDownloader(true);
-					log.info("Forcing update to: {}", AutoUpdaterFactory.JAR_PATH);
+					var downloader = updater.getDownloader(true);
+					log.info("Forcing update to: {} in 2s", AutoUpdaterFactory.JAR_PATH);
+					Thread.sleep(2000);
 					downloader.downloadTo(AutoUpdaterFactory.JAR_PATH); // this should be buffered/changed too
 				} catch (IOException e) {
 					log.error("Unable to retrieve downloader new Jar. ", e);
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
 				}
 			}
 		}));
