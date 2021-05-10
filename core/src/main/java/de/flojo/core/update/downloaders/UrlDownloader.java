@@ -6,6 +6,8 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @Slf4j
 public class UrlDownloader implements IDownloadUpdate {
@@ -18,9 +20,15 @@ public class UrlDownloader implements IDownloadUpdate {
 
 	@SneakyThrows
 	@Override
-	public void downloadTo(final String targetPath) {
+	public void downloadTo(final Path fullTargetPath, final boolean erasePrevious) {
+		final var targetPath = fullTargetPath.getParent().toString();
 		log.info("Download from: \"{}\" to: \"{}\"", source, targetPath);
-		FileUtils.copyURLToFile(new URL(source), new File(targetPath)
-		);
+		final var basenameSource = Path.of(source).getFileName().toString();
+		log.debug("Identified basename \"{}\"", basenameSource);
+		FileUtils.copyURLToFile(new URL(source), Path.of(targetPath,basenameSource).toFile());
+		if(erasePrevious) {
+			log.info("Deleting old state...");
+			Files.delete(fullTargetPath);
+		}
 	}
 }

@@ -10,11 +10,11 @@ import de.flojo.core.os.StartGuards;
 import de.flojo.core.update.AbstractAutoUpdater;
 import de.flojo.core.update.AutoUpdaterFactory;
 import de.flojo.core.update.NewVersionState;
-import de.flojo.core.update.downloaders.IDownloadUpdate;
 import lombok.extern.slf4j.Slf4j;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.nio.file.Path;
 
 @Slf4j
 public class Main extends ApplicationAdapter {
@@ -48,7 +48,8 @@ public class Main extends ApplicationAdapter {
 					var downloader = updater.getDownloader(true);
 					log.info("Forcing update to: {} in 2s", AutoUpdaterFactory.JAR_PATH);
 					Thread.sleep(2000);
-					downloader.downloadTo(AutoUpdaterFactory.JAR_PATH); // this should be buffered/changed too
+					// this should be buffered/changed too
+					downloader.downloadTo(Path.of(AutoUpdaterFactory.JAR_PATH), newVersionState.equals(NewVersionState.PRESENT));
 				} catch (IOException e) {
 					log.error("Unable to retrieve downloader new Jar. ", e);
 				} catch (InterruptedException e) {
