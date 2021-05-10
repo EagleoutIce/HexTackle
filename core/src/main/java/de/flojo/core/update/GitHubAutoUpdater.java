@@ -57,7 +57,7 @@ public class GitHubAutoUpdater extends AbstractAutoUpdater {
     }
 
     private boolean tryGivenContentForVersion(final GHContent content) {
-        // we silence the matcher, as this errors are expected
+        // we silence the matcher, as these errors are expected
         final var data = matcher.match(content.getName(), pattern -> {
         });
         if (ProgramData.isValid(data) && Objects.equals(data.getBaseName(), programData.getBaseName())) {
