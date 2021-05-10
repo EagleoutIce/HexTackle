@@ -34,9 +34,11 @@ public class Main extends ApplicationAdapter {
 		updater.fetch();
 
 		final var config = new Lwjgl3ApplicationConfiguration();
+		log.debug("Setup configuration");
 		config.setTitle("HexTackle - Editor");
 		log.info("Starting editor ({})", config);
-		new Lwjgl3Application(new Main(), config);
+		final var application = new Lwjgl3Application(new Main(), config);
+		log.debug("Application running (v{})", application.getVersion());
 	}
 
 	private static void registerVersionAutoUpdateListener(final AbstractAutoUpdater updater) {
