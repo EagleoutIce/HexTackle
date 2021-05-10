@@ -23,10 +23,10 @@ public abstract class AbstractAutoUpdater {
 
 	protected void updateVersionState(final NewVersionState newVersionState) {
 		log.debug("Got Update for new version: {}", newVersionState);
+		this.newVersionState = newVersionState;
 		for (final var listener : listeners) {
 			listener.update(newVersionState);
 		}
-		this.newVersionState = newVersionState;
 	}
 
 	public void registerNewVersionListener(final IListenToNewVersionState listener) {

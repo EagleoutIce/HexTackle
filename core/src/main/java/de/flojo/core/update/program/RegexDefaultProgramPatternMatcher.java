@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 @Slf4j
 public class RegexDefaultProgramPatternMatcher implements IAmProgramPatternMatcher {
 	private static final Pattern PROGRAM_NAME = Pattern.compile(
-			"(.*/)?(?<name>[^-]*)-(?<major>\\d*)(\\.(?<minor>\\d*)(\\.(?<patch>\\d*))?)?\\.jar");
+			"(.*[\\\\/])?(?<name>[^-]*)-(?<major>\\d*)(\\.(?<minor>\\d*)(\\.(?<patch>\\d*))?)?\\.jar");
 
 	@Override
 	public ProgramData match(final CharSequence path, IDescribePatternError onMatchError) {

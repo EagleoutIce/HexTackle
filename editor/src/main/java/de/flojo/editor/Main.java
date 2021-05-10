@@ -42,15 +42,14 @@ public class Main extends ApplicationAdapter {
 	private static void registerVersionAutoUpdateListener(final AbstractAutoUpdater updater) {
 		updater.registerNewVersionListener((newVersionState -> {
 			// warning: potential downgrade for same!
-			if (newVersionState.equals(NewVersionState.PRESENT) || newVersionState.equals(
-					NewVersionState.SAME_PRESENT)) {
+			if (newVersionState.equals(NewVersionState.PRESENT)) {
 				try {
 					var downloader = updater.getDownloader(true);
 					log.info("Forcing update to: {} in 2s", AutoUpdaterFactory.JAR_PATH);
 					Thread.sleep(2000);
 					// this should be buffered/changed too
-					downloader.downloadTo(Path.of(AutoUpdaterFactory.JAR_PATH),
-										  newVersionState.equals(NewVersionState.PRESENT));
+					downloader.downloadTo(Path.of(AutoUpdaterFactory.JAR_PATH));
+					// TODO: start new and then delete old
 				} catch (IOException e) {
 					log.error("Unable to retrieve downloader new Jar. ", e);
 				} catch (InterruptedException e) {

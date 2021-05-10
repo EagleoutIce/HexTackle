@@ -52,7 +52,7 @@ public class GitHubAutoUpdater extends AbstractAutoUpdater {
 		for (final var content : contentList) {
 			if (tryGivenContentForVersion(content)) return;
 		}
-		log.warn("Found no valid jarfile to update on github");
+		log.warn("Found no valid jarfile to update on GitHub");
 		updateVersionState(NewVersionState.FAILED_TO_FETCH);
 	}
 
