@@ -1,6 +1,7 @@
 package de.flojo.editor;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -38,10 +39,7 @@ public class Main extends ApplicationAdapter {
 		log.debug("Setup configuration");
 		config.setTitle("HexTackle - Editor");
 		config.setIdleFPS(30);
-		// config.setForegroundFPS(0);
-		// config.setMaxNetThreads(8);
-		config.setInitialVisible(true);
-		config.useOpenGL3(true, 3, 2);
+		config.setMaxNetThreads(8);
 		config.enableGLDebugOutput(true, new ConsumerPrintStreamBridge(log::debug));
 		log.info("Starting editor ({})", config);
 		new Lwjgl3Application(new Main(), config);
@@ -75,7 +73,8 @@ public class Main extends ApplicationAdapter {
 			v = Math.floorMod(v + 1, 256);
 			lastColor = new Color(Color.HSBtoRGB(v / 255f, .75f, .75f));
 		}
-		// ScreenUtils.clear(lastColor.getRed() / 255f, lastColor.getGreen() / 255f, lastColor.getBlue() / 255f, 1f);
+		Gdx.gl.glUseProgram(0);
+		ScreenUtils.clear(lastColor.getRed() / 255f, lastColor.getGreen() / 255f, lastColor.getBlue() / 255f, 1f);
 		final var batch = new SpriteBatch();
 		final var font = new BitmapFont();
 		batch.begin();
