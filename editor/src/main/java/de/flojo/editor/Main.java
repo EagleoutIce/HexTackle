@@ -38,8 +38,8 @@ public class Main extends ApplicationAdapter {
 		log.debug("Setup configuration");
 		config.setTitle("HexTackle - Editor");
 		config.setIdleFPS(30);
-		config.setForegroundFPS(0);
-		config.setMaxNetThreads(8);
+		// config.setForegroundFPS(0);
+		// config.setMaxNetThreads(8);
 		config.setInitialVisible(true);
 		config.useOpenGL3(true, 3, 2);
 		config.enableGLDebugOutput(true, new ConsumerPrintStreamBridge(log::debug));
@@ -75,7 +75,7 @@ public class Main extends ApplicationAdapter {
 			v = Math.floorMod(v + 1, 256);
 			lastColor = new Color(Color.HSBtoRGB(v / 255f, .75f, .75f));
 		}
-		ScreenUtils.clear(lastColor.getRed() / 255f, lastColor.getGreen() / 255f, lastColor.getBlue() / 255f, 1f);
+		// ScreenUtils.clear(lastColor.getRed() / 255f, lastColor.getGreen() / 255f, lastColor.getBlue() / 255f, 1f);
 		final var batch = new SpriteBatch();
 		final var font = new BitmapFont();
 		batch.begin();
