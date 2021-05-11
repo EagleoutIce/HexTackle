@@ -4,31 +4,25 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>editor</artifactId>
-    <version>1.0.2</version>
-
-    <name>editor</name>
-
     <parent>
         <groupId>de.flojo</groupId>
         <artifactId>hextackle</artifactId>
-        <version>1.0.0</version>
+        <version>1</version>
     </parent>
 
-    <properties>
-
-    </properties>
+    <artifactId>editor</artifactId>
+    <version>${hextackle.editor.version}</version>
 
     <dependencies>
         <dependency>
             <groupId>de.flojo</groupId>
             <artifactId>engine</artifactId>
-            <version>1.0.0</version>
+            <version>${hextackle.engine.version}</version>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>editor-${project.version}</finalName>
+        <finalName>${project.name}-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

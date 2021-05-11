@@ -11,6 +11,7 @@
         <module name="server" />
         <module name="editor" />
         <module name="engine" />
+        <module name="visual-core" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -19,6 +20,7 @@
       <module name="engine" target="11" />
       <module name="hextackle" target="11" />
       <module name="server" target="11" />
+      <module name="visual-core" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

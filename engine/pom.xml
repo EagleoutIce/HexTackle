@@ -4,19 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>engine</artifactId>
-    <version>1.0.0</version>
-
-    <name>engine</name>
-
     <parent>
         <groupId>de.flojo</groupId>
         <artifactId>hextackle</artifactId>
-        <version>1.0.0</version>
+        <version>1</version>
     </parent>
 
-    <properties>
-    </properties>
+    <artifactId>engine</artifactId>
+    <version>${hextackle.engine.version}</version>
 
     <dependencies>
         <dependency>
@@ -44,13 +39,13 @@
         <dependency>
             <groupId>de.flojo</groupId>
             <artifactId>core</artifactId>
-            <version>1.0.0</version>
+            <version>${hextackle.core.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>engine-${project.version}</finalName>
+        <finalName>${project.name}-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

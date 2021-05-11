@@ -6,7 +6,7 @@
 
     <groupId>de.flojo</groupId>
     <artifactId>hextackle</artifactId>
-    <version>1.0.0</version>
+    <version>1</version>
 
     <name>HexTackle</name>
     <packaging>pom</packaging>
@@ -20,6 +20,12 @@
         <slf4j.version>1.7.30</slf4j.version>
         <lombok.version>1.18.20</lombok.version>
         <githubapi.version>1.128</githubapi.version>
+        <!-->Submodule versions</!-->
+        <hextackle.core.version>1.0.0</hextackle.core.version>
+        <hextackle.vcore.version>1.0.0</hextackle.vcore.version>
+        <hextackle.engine.version>1.0.0</hextackle.engine.version>
+        <hextackle.server.version>1.0.0</hextackle.server.version>
+        <hextackle.editor.version>1.0.2</hextackle.editor.version>
     </properties>
 
     <dependencies>
@@ -46,6 +52,7 @@
     <modules>
         <module>core</module>
         <module>engine</module>
+        <module>visual-core</module>
         <module>server</module>
         <module>editor</module>
     </modules>

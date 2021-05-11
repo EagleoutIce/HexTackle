@@ -73,7 +73,6 @@ public class Main extends ApplicationAdapter {
 			v = Math.floorMod(v + 1, 256);
 			lastColor = new Color(Color.HSBtoRGB(v / 255f, .75f, .75f));
 		}
-		Gdx.gl.glUseProgram(0);
 		ScreenUtils.clear(lastColor.getRed() / 255f, lastColor.getGreen() / 255f, lastColor.getBlue() / 255f, 1f);
 		final var batch = new SpriteBatch();
 		final var font = new BitmapFont();
