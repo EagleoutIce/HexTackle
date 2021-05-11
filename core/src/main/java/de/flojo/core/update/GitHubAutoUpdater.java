@@ -48,7 +48,7 @@ public class GitHubAutoUpdater extends AbstractAutoUpdater {
 		log.trace("Connected to GitHub");
 		final var rateLimit = gitHub.getRateLimit();
 		log.info("Rate Limit: {}", rateLimit);
-		if(rateLimit.getCore().getRemaining() <= 0) {
+		if (rateLimit.getCore().getRemaining() <= 0) {
 			updateVersionState(NewVersionState.FAILED_TO_FETCH);
 			return;
 		}

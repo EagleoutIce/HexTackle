@@ -20,6 +20,10 @@ public class Main extends ApplicationAdapter {
 	int v = 0;
 	long last = System.currentTimeMillis();
 	Color lastColor = new Color(0, 0, 0);
+	Stage stage;
+	AskForAutoUpdate updater;
+	BitmapFont font;
+	SpriteBatch batch;
 
 	public static void main(String[] args) {
 		if (StartGuards.guardMacOs(args)) {
@@ -37,11 +41,6 @@ public class Main extends ApplicationAdapter {
 		log.info("Starting editor ({})", config);
 		new Lwjgl3Application(new Main(), config);
 	}
-
-	Stage stage;
-	AskForAutoUpdate updater;
-	BitmapFont font;
-	SpriteBatch batch;
 
 	@Override
 	public void create() {

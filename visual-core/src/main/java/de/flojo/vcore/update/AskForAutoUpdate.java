@@ -37,7 +37,8 @@ public class AskForAutoUpdate {
 					  return true;
 				  }
 			  })
-			  .setNoButton("No", new InputListener() {});
+			  .setNoButton("No", new InputListener() {
+			  });
 	}
 
 	public void fetch() {

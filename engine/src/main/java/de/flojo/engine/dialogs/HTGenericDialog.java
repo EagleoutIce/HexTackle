@@ -1,6 +1,5 @@
 package de.flojo.engine.dialogs;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -9,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -18,15 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HTGenericDialog extends Dialog {
 	public static final BitmapFont DEFAULT_FONT = new BitmapFont();
-	public static final WindowStyle DEFAULT_STYLE = new WindowStyle(DEFAULT_FONT, Color.BLACK, new SpriteDrawable(new Sprite(createTexture(600,600, Color.BLACK))));
-
-	private static Texture createTexture(final int width, final int height, final Color color) {
-		final var pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
-		pixmap.setColor(color.r, color.g, color.b, 1f);
-		pixmap.fillRectangle(0, 0, width, height);
-
-		return new Texture(pixmap);
-	}
+	public static final WindowStyle DEFAULT_STYLE = new WindowStyle(DEFAULT_FONT, Color.BLACK, new SpriteDrawable(
+			new Sprite(createTexture(600, 600, Color.BLACK))));
 
 	public HTGenericDialog(final String title) {
 		this(title, DEFAULT_STYLE);
@@ -35,6 +26,14 @@ public class HTGenericDialog extends Dialog {
 	public HTGenericDialog(final String title, final WindowStyle style) {
 		super(title, style);
 		setup();
+	}
+
+	private static Texture createTexture(final int width, final int height, final Color color) {
+		final var pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
+		pixmap.setColor(color.r, color.g, color.b, 1f);
+		pixmap.fillRectangle(0, 0, width, height);
+
+		return new Texture(pixmap);
 	}
 
 	private void setup() {

@@ -165,7 +165,7 @@ public class ConsumerPrintStreamBridge extends PrintStream {
 
 	@Override
 	public PrintStream format(final Locale l, final String format, final Object... args) {
-		writer.accept(String.format(l,format, args));
+		writer.accept(String.format(l, format, args));
 		return this;
 	}
 

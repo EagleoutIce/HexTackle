@@ -14,20 +14,19 @@ import java.net.URISyntaxException;
 public class AutoUpdaterFactory implements IFactory<AbstractAutoUpdater> {
 
 	public static final String JAR_PATH;
+	private static final String JAR_END = ".jar";
 
 	static {
 		String bufferedJarPath;
 		try {
 			bufferedJarPath = new File(AutoUpdaterFactory.class.getProtectionDomain().getCodeSource().getLocation()
-														 .toURI()).getPath();
+															   .toURI()).getPath();
 		} catch (URISyntaxException ex) {
 			log.error("On Retrieving jar path. ", ex);
 			bufferedJarPath = "";
 		}
 		JAR_PATH = bufferedJarPath;
 	}
-
-	private static final String JAR_END = ".jar";
 
 	public AutoUpdaterFactory() {
 		log.info("Using Jar-Path: {}", JAR_PATH);
