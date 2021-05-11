@@ -20,7 +20,7 @@ public class JarLauncher {
 		log.debug("Launching new jar ({}) with java home \"{}\"", jar, JAVA_JVM_HOME);
 
 		final var command = new ArrayList<String>();
-		command.add("java");
+		command.add(JAVA_JVM_HOME);
 		for (final var javaArg: javaArgs) {
 			if (!javaArg.isBlank())
 				command.add(javaArg);
