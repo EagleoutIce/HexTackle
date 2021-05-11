@@ -41,6 +41,8 @@ public class HTGenericDialog extends Dialog {
 		setModal(true);
 		setMovable(true);
 		setResizable(false);
+		setWidth(300);
+		setHeight(300);
 	}
 
 	@Override
@@ -86,4 +88,8 @@ public class HTGenericDialog extends Dialog {
 		return this;
 	}
 
+	@Override
+	protected void result(final Object object) {
+		hide();
+	}
 }

@@ -1,5 +1,6 @@
 package de.flojo.vcore.update;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -58,12 +59,14 @@ public class AskForAutoUpdate {
 	}
 
 	private void downloadUpdate() {
+		dialog.hide();
 		try {
 			var downloader = updater.getDownloader(true);
 			log.info("Update to: {}", AutoUpdaterFactory.JAR_PATH);
 			// this should be buffered/changed too
 			downloader.downloadTo(Path.of(AutoUpdaterFactory.JAR_PATH));
 			// TODO: start new and then delete old
+			Gdx.app.exit();
 		} catch (IOException e) {
 			log.error("Unable to retrieve downloader new Jar. ", e);
 		}

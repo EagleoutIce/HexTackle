@@ -46,6 +46,7 @@ public class Main extends ApplicationAdapter {
 	@Override
 	public void create() {
 		stage = new Stage();
+		Gdx.input.setInputProcessor(stage);
 		updater = new AskForAutoUpdate(stage);
 		updater.fetch();
 		batch = new SpriteBatch();
