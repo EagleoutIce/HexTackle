@@ -19,6 +19,11 @@
             <artifactId>engine</artifactId>
             <version>${hextackle.engine.version}</version>
         </dependency>
+        <dependency>
+            <groupId>de.flojo</groupId>
+            <artifactId>visual-core</artifactId>
+            <version>${hextackle.vcore.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

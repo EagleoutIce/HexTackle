@@ -22,7 +22,6 @@ public class GitHubAutoUpdater extends AbstractAutoUpdater {
 	private static final String REPO_ROOT = "./";
 	private static final String TARGET_BRANCH = "build";
 
-
 	private final String jarPath;
 	private final ProgramData programData;
 	private GHContent updateData = null;
@@ -45,10 +44,21 @@ public class GitHubAutoUpdater extends AbstractAutoUpdater {
 	}
 
 	private void identifyPresentVersion() throws IOException {
-		final var gitHub = GitHub.connect();
-		final var repository = gitHub.getUser(REPO_OWNER).getRepository(REPO_NAME);
+		final var gitHub = GitHub.connectAnonymously();
+		log.trace("Connected to GitHub");
+		final var rateLimit = gitHub.getRateLimit();
+		log.info("Rate Limit: {}", rateLimit);
+		if(rateLimit.getCore().getRemaining() <= 0) {
+			updateVersionState(NewVersionState.FAILED_TO_FETCH);
+			return;
+		}
+		final var user = gitHub.getUser(REPO_OWNER);
+		log.trace("Got user: {}", user.getName());
+		final var repository = user.getRepository(REPO_NAME);
+		log.trace("Repository: {}", repository.getName());
 		final var contentList = repository.getDirectoryContent(REPO_ROOT,
 															   repository.getBranch(TARGET_BRANCH).getSHA1());
+		log.trace("Fetched contents");
 		for (final var content : contentList) {
 			if (tryGivenContentForVersion(content)) return;
 		}
@@ -86,6 +96,7 @@ public class GitHubAutoUpdater extends AbstractAutoUpdater {
 		if (ProgramData.isValid(programData)) {
 			log.debug("Start fetching updates for github auto updater...");
 			new Thread(this::checkForPossibleUpdate).start();
+			// TODO: executor service timeout
 		} else {
 			log.error("Fetch update failed, got invalid programData for jarPath {}", this.jarPath);
 		}

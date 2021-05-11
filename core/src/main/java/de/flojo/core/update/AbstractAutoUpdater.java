@@ -1,6 +1,7 @@
 package de.flojo.core.update;
 
 import de.flojo.core.update.downloaders.IDownloadUpdate;
+import de.flojo.core.update.program.ProgramData;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;

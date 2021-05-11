@@ -6,21 +6,17 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import de.flojo.core.logging.ConsumerPrintStreamBridge;
 import de.flojo.core.os.StartGuards;
-import de.flojo.core.update.AbstractAutoUpdater;
-import de.flojo.core.update.AutoUpdaterFactory;
-import de.flojo.core.update.NewVersionState;
+import de.flojo.vcore.update.AskForAutoUpdate;
 import lombok.extern.slf4j.Slf4j;
 
 import java.awt.Color;
-import java.io.IOException;
-import java.nio.file.Path;
 
 @Slf4j
 public class Main extends ApplicationAdapter {
-	private static AbstractAutoUpdater updater;
 	int v = 0;
 	long last = System.currentTimeMillis();
 	Color lastColor = new Color(0, 0, 0);
@@ -29,11 +25,8 @@ public class Main extends ApplicationAdapter {
 		if (StartGuards.guardMacOs(args)) {
 			return;
 		}
-		updater = new AutoUpdaterFactory().create();
 		// Note: this is a default implementation and has to change; we want a button and an information
 		// to check for updates; this automatically auto-update anything is pretty bad :D
-		registerVersionAutoUpdateListener(updater);
-		updater.fetch();
 
 		final var config = new Lwjgl3ApplicationConfiguration();
 		log.debug("Setup configuration");
@@ -45,25 +38,20 @@ public class Main extends ApplicationAdapter {
 		new Lwjgl3Application(new Main(), config);
 	}
 
-	private static void registerVersionAutoUpdateListener(final AbstractAutoUpdater updater) {
-		updater.registerNewVersionListener((newVersionState -> {
-			// warning: potential downgrade for same!
-			if (newVersionState.equals(NewVersionState.PRESENT)) {
-				try {
-					var downloader = updater.getDownloader(true);
-					log.info("Forcing update to: {} in 2s", AutoUpdaterFactory.JAR_PATH);
-					Thread.sleep(2000);
-					// this should be buffered/changed too
-					downloader.downloadTo(Path.of(AutoUpdaterFactory.JAR_PATH));
-					// TODO: start new and then delete old
-				} catch (IOException e) {
-					log.error("Unable to retrieve downloader new Jar. ", e);
-				} catch (InterruptedException e) {
-					Thread.currentThread().interrupt();
-				}
-			}
-		}));
+	Stage stage;
+	AskForAutoUpdate updater;
+	BitmapFont font;
+	SpriteBatch batch;
+
+	@Override
+	public void create() {
+		stage = new Stage();
+		updater = new AskForAutoUpdate(stage);
+		updater.fetch();
+		batch = new SpriteBatch();
+		font = new BitmapFont();
 	}
+
 	// todo: sage and label; render correctly
 
 	@Override
@@ -74,10 +62,18 @@ public class Main extends ApplicationAdapter {
 			lastColor = new Color(Color.HSBtoRGB(v / 255f, .75f, .75f));
 		}
 		ScreenUtils.clear(lastColor.getRed() / 255f, lastColor.getGreen() / 255f, lastColor.getBlue() / 255f, 1f);
-		final var batch = new SpriteBatch();
-		final var font = new BitmapFont();
+		stage.act(Gdx.graphics.getDeltaTime());
+		stage.draw();
 		batch.begin();
-		font.draw(batch, "Update State: " + updater.getNewVersionState(), 10, 15);
+		font.draw(batch, "Update State: " + updater.getUpdater().getNewVersionState(), 10, 15);
 		batch.end();
+	}
+
+	@Override
+	public void dispose() {
+		super.dispose();
+		stage.dispose();
+		batch.dispose();
+		font.dispose();
 	}
 }
