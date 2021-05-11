@@ -7,7 +7,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public interface IAmGameCore {
 	AssetManager getAssetManager();
+
 	ShapeRenderer getShapeRenderer();
+
 	Game getGame();
+
 	Viewport getViewport();
 }

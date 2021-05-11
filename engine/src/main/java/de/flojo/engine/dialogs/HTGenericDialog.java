@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HTGenericDialog extends Dialog {
 	public static final BitmapFont DEFAULT_FONT = new BitmapFont();
 	public static final WindowStyle DEFAULT_STYLE = new WindowStyle(DEFAULT_FONT, Color.BLACK, new SpriteDrawable(
-			new Sprite(createTexture(600, 600, Color.BLACK))));
+			new Sprite(createTexture(300, 300, Color.LIGHT_GRAY))));
 
 	public HTGenericDialog(final String title) {
 		this(title, DEFAULT_STYLE);
@@ -39,7 +39,7 @@ public class HTGenericDialog extends Dialog {
 	private void setup() {
 		setModal(true);
 		setMovable(true);
-		setResizable(false);
+		setResizable(true);
 		setWidth(300);
 		setHeight(300);
 	}

@@ -98,6 +98,7 @@ public class GitHubAutoUpdater extends AbstractAutoUpdater {
 			new Thread(this::checkForPossibleUpdate).start();
 			// TODO: executor service timeout
 		} else {
+			updateVersionState(NewVersionState.DISABLED);
 			log.error("Fetch update failed, got invalid programData for jarPath {}", this.jarPath);
 		}
 	}

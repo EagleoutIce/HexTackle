@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import de.flojo.core.update.AbstractAutoUpdater;
 import de.flojo.core.update.AutoUpdaterFactory;
+import de.flojo.core.update.IListenToNewVersionState;
 import de.flojo.core.update.NewVersionState;
 import de.flojo.engine.dialogs.HTGenericDialog;
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +19,11 @@ public class AskForAutoUpdate {
 	private final AbstractAutoUpdater updater;
 	private final Stage stage;
 	private final HTGenericDialog dialog;
+	private IListenToNewVersionState onDialog;
 
 	public AskForAutoUpdate(final Stage stage) {
 		this.stage = stage;
-		dialog = new HTGenericDialog("Update");
+		dialog = new HTGenericDialog("");
 		setupDialog();
 		updater = new AutoUpdaterFactory().create();
 		updater.registerNewVersionListener(this::onNewVersionState);
@@ -34,11 +36,30 @@ public class AskForAutoUpdate {
 				  public boolean touchDown(final InputEvent event, final float x, final float y, final int pointer,
 										   final int button) {
 					  downloadUpdate();
+					  onDialog.update(NewVersionState.PRESENT);
 					  return true;
 				  }
 			  })
 			  .setNoButton("No", new InputListener() {
+				  @Override
+				  public boolean touchDown(final InputEvent event, final float x, final float y, final int pointer,
+										   final int button) {
+					  onDialog.update(NewVersionState.PRESENT);
+					  return true;
+				  }
 			  });
+	}
+
+	public void registerNewVersionListener(final IListenToNewVersionState listener) {
+		updater.registerNewVersionListener(listener);
+	}
+
+	public boolean deleteNewVersionListener(final IListenToNewVersionState listener) {
+		return updater.deleteNewVersionListener(listener);
+	}
+
+	public void registerNewDialogListener(final IListenToNewVersionState listener) { // TODO: new interface
+		onDialog = listener;
 	}
 
 	public void fetch() {
@@ -53,6 +74,9 @@ public class AskForAutoUpdate {
 		// warning: potential downgrade for same!
 		if (newVersionState.equals(NewVersionState.PRESENT))
 			askForUpdate();
+		else {
+			onDialog.update(newVersionState);
+		}
 	}
 
 	private void askForUpdate() {

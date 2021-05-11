@@ -4,13 +4,9 @@ import de.flojo.core.update.downloaders.IDownloadUpdate;
 
 public class VoidAutoUpdater extends AbstractAutoUpdater {
 
-	public VoidAutoUpdater() {
-		updateVersionState(NewVersionState.DISABLED);
-	}
-
 	@Override
 	public void fetch() {
-		// Do nothing on fetch
+		updateVersionState(NewVersionState.DISABLED);
 	}
 
 	@Override
