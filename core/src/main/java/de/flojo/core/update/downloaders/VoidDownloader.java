@@ -4,7 +4,7 @@ import java.nio.file.Path;
 
 public class VoidDownloader implements IDownloadUpdate {
 	@Override
-	public void downloadTo(final Path fullTargetPath) {
+	public Path downloadTo(final Path fullTargetPath) {
 		throw new UnsupportedOperationException("There is nothing to download for " + fullTargetPath);
 	}
 }

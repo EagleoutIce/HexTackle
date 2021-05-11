@@ -19,11 +19,13 @@ public class UrlDownloader implements IDownloadUpdate {
 
 	@SneakyThrows
 	@Override
-	public void downloadTo(final Path fullTargetPath) {
-		final var targetPath = fullTargetPath.getParent().toString();
-		log.info("Download from: \"{}\" to: \"{}\"", source, targetPath);
+	public Path downloadTo(final Path fullTargetPath) {
+		final var targetParent = fullTargetPath.getParent().toString();
+		log.info("Download from: \"{}\" to: \"{}\"", source, targetParent);
 		final var basenameSource = FilenameUtils.getName(source);
 		log.debug("Identified basename \"{}\"", basenameSource);
-		FileUtils.copyURLToFile(new URL(source), Path.of(targetPath, basenameSource).toFile());
+		final var target = Path.of(targetParent, basenameSource);
+		FileUtils.copyURLToFile(new URL(source), target.toFile());
+		return target;
 	}
 }

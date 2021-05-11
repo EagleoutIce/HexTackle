@@ -1,5 +1,6 @@
 package de.flojo.core.os;
 
+import de.flojo.core.launcher.JarLauncher;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -38,17 +39,9 @@ public class StartGuards {
 		final var currentPath = StartGuards.class.getProtectionDomain()
 												 .getCodeSource().getLocation().toURI().getPath()
 												 .replace('/', File.separator.charAt(0));
-		final var command = new ArrayList<String>();
-		command.add("java");
-		if (!extraPre.isBlank())
-			command.add(extraPre);
-		command.add("-jar");
-		command.add(currentPath);
-		command.addAll(Arrays.asList(args));
-		command.add(extraArg);
-		log.info("Starting with: {}", command);
-		final var processBuilder = new ProcessBuilder(command);
-		processBuilder.start();
+		final var lists = new ArrayList<>(Arrays.asList(args));
+		lists.add(extraArg);
+		JarLauncher.launch(extraPre, currentPath, lists.toArray(String[]::new));
 	}
 
 	private static boolean hasGuard(String[] args, String guard) {

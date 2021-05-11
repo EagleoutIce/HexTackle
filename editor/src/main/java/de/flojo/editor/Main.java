@@ -41,19 +41,6 @@ public class Main extends Game implements IAmGameCore {
 	public void render() {
 		ScreenUtils.clear(0, 0, 0, 1);
 		super.render();
-		/*
-		if (System.currentTimeMillis() - last > 25) {
-			v = Math.floorMod(v + 1, 256);
-			lastColor = new Color(Color.HSBtoRGB(v / 255f, .75f, .75f));
-			last = System.currentTimeMillis();
-		}
-		ScreenUtils.clear(lastColor.getRed() / 255f, lastColor.getGreen() / 255f, lastColor.getBlue() / 255f, 1f);
-		stage.act(Gdx.graphics.getDeltaTime());
-		stage.draw();
-		batch.begin();
-		font.draw(batch, "Update State: " + updater.getUpdater().getNewVersionState(), 10, 15);
-		batch.end();
-		*/
 	}
 
 	@Override
