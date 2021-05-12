@@ -21,11 +21,11 @@
         <lombok.version>1.18.20</lombok.version>
         <githubapi.version>1.128</githubapi.version>
         <!-->Submodule versions</!-->
-        <hextackle.core.version>1.0.0</hextackle.core.version>
+        <hextackle.core.version>1.0.1</hextackle.core.version>
         <hextackle.vcore.version>1.0.0</hextackle.vcore.version>
         <hextackle.engine.version>1.0.0</hextackle.engine.version>
         <hextackle.server.version>1.0.0</hextackle.server.version>
-        <hextackle.editor.version>1.0.5</hextackle.editor.version>
+        <hextackle.editor.version>1.0.6</hextackle.editor.version>
     </properties>
 
     <dependencies>
