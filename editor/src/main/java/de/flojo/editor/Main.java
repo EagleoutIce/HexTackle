@@ -2,11 +2,10 @@ package de.flojo.editor;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.flojo.engine.IAmGameCore;
 import de.flojo.vcore.resource.loading.LoadingScreen;
@@ -14,13 +13,13 @@ import de.flojo.vcore.resource.loading.LoadingScreen;
 
 public class Main extends Game implements IAmGameCore {
 	private AssetManager assetManager;
-	private BitmapFont font;
 	private SpriteBatch batch;
 	private ShapeRenderer shapeRenderer;
 	private Viewport viewport;
 
 	@Override
 	public void resize(final int width, final int height) {
+		super.resize(width, height);
 		viewport.update(width, height, true);
 		shapeRenderer.setProjectionMatrix(viewport.getCamera().combined);
 	}
@@ -28,10 +27,9 @@ public class Main extends Game implements IAmGameCore {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		font = new BitmapFont();
 		assetManager = new AssetManager();
 		shapeRenderer = new ShapeRenderer();
-		viewport = new StretchViewport(800, 600);
+		viewport = new ScreenViewport();
 		setScreen(new LoadingScreen(this));
 	}
 
@@ -47,7 +45,6 @@ public class Main extends Game implements IAmGameCore {
 	public void dispose() {
 		super.dispose();
 		batch.dispose();
-		font.dispose();
 	}
 
 	@Override

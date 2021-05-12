@@ -10,10 +10,11 @@ import java.util.Arrays;
 public class JarLauncher {
 	public static final String JAVA_JVM_HOME = ProcessHandle.current().info().command().orElse("java");
 
-	private JarLauncher() {}
+	private JarLauncher() {
+	}
 
 	public static void launch(final String javaArg, final String jar, final String... jarArgs) throws IOException {
-		launch(new String[] {javaArg}, jar, jarArgs);
+		launch(new String[]{javaArg}, jar, jarArgs);
 	}
 
 	public static void launch(final String[] javaArgs, final String jar, final String[] jarArgs) throws IOException {
@@ -21,7 +22,7 @@ public class JarLauncher {
 
 		final var command = new ArrayList<String>();
 		command.add(JAVA_JVM_HOME);
-		for (final var javaArg: javaArgs) {
+		for (final var javaArg : javaArgs) {
 			if (!javaArg.isBlank())
 				command.add(javaArg);
 		}

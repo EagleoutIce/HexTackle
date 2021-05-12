@@ -1,32 +1,28 @@
 package de.flojo.vcore.resource.loading;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import de.flojo.core.update.NewVersionState;
+import de.flojo.engine.HTScreenAdapter;
 import de.flojo.engine.IAmGameCore;
+import de.flojo.vcore.screens.RgbCycleScreen;
 import de.flojo.vcore.update.AskForAutoUpdate;
-import dummies.screens.RgbCycleScreen;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class LoadingScreen extends ScreenAdapter {
+public class LoadingScreen extends HTScreenAdapter {
 	private static final int PROGRESS_BAR_HEIGHT = 50;
 	private static final int PROGRESS_BAR_WIDTH = 200;
-	private final IAmGameCore gameCore;
 	private final RgbCycleScreen postScreen; // move to game
 	private final AskForAutoUpdate updater;
-	private final Stage stage;
 
 	private LoadingState loadingState = LoadingState.INITIAL;
 
 	public LoadingScreen(final IAmGameCore gameCore) {
-		this.gameCore = gameCore;
-		stage = new Stage();
+		super(gameCore);
 		Gdx.input.setInputProcessor(stage);
-		postScreen = new RgbCycleScreen();
+		postScreen = new RgbCycleScreen(gameCore);
 		updater = new AskForAutoUpdate(stage);
 		updater.registerNewDialogListener(newState -> {
 			log.info("New version state {}", newState);
@@ -38,7 +34,7 @@ public class LoadingScreen extends ScreenAdapter {
 	@Override
 	public void show() {
 		log.info("Showing resource loading screen");
-		gameCore.getAssetManager().finishLoading();
+		getGameCore().getAssetManager().finishLoading();
 		loadingState = LoadingState.RESOURCES;
 	}
 
@@ -55,21 +51,21 @@ public class LoadingScreen extends ScreenAdapter {
 	private void updateState() {
 		switch (loadingState) {
 			case RESOURCES:
-				if (gameCore.getAssetManager().update()) {
+				if (getGameCore().getAssetManager().update()) {
 					loadingState = LoadingState.UPDATE;
 					updater.fetch();
 				}
 				break;
 			case FINISHED:
-				gameCore.getGame().setScreen(postScreen);
+				getGameCore().getGame().setScreen(postScreen);
 				break;
 			default:
 		}
 	}
 
 	private void renderProgressbar() {
-		final var progress = gameCore.getAssetManager().getProgress();
-		final var shapeRenderer = gameCore.getShapeRenderer();
+		final var progress = getGameCore().getAssetManager().getProgress();
+		final var shapeRenderer = getGameCore().getShapeRenderer();
 		// TODO: other progress
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 		shapeRenderer.setColor(Color.WHITE);
@@ -77,9 +73,4 @@ public class LoadingScreen extends ScreenAdapter {
 		shapeRenderer.end();
 	}
 
-	@Override
-	public void dispose() {
-		super.dispose();
-		stage.dispose();
-	}
 }
