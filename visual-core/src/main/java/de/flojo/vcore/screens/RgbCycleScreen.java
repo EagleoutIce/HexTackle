@@ -23,8 +23,9 @@ public class RgbCycleScreen extends HTScreenAdapter {
 		final var labelStyle = new Label.LabelStyle();
 		labelStyle.font = new BitmapFont();
 		labelStyle.fontColor = Color.BLACK;
-		new JarPackageMetaRetriever().getPackage("META-INF/maven/de.flojo/core/pom.properties");
-		label = new Label("This is text", labelStyle);
+		final var version = new JarPackageMetaRetriever().getPackage("META-INF/maven/de.flojo/core/pom.properties");
+		label = new Label("Core Version" + (version.map(packageMetaInformation -> " " + packageMetaInformation.getVersion())
+												   .orElse("")), labelStyle);
 		label.setPosition(gameCore.getViewport().getWorldWidth() / 2f, gameCore.getViewport().getWorldHeight() / 2f);
 		stage.addActor(label);
 	}

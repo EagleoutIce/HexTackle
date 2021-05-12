@@ -1,11 +1,9 @@
 package de.flojo.core.version;
 
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import java.io.Serializable;
 
-@ToString
 @EqualsAndHashCode
 public class PackageMetaInformation implements Serializable {
 	private final String groupId;
@@ -29,5 +27,14 @@ public class PackageMetaInformation implements Serializable {
 
 	public PackageVersion getVersion() {
 		return version;
+	}
+
+	@Override
+	public String toString() {
+		return "PackageMetaInformation{" +
+				"groupId='" + groupId + '\'' +
+				", artifactId='" + artifactId + '\'' +
+				", version=" + version +
+				'}';
 	}
 }
