@@ -2,16 +2,14 @@ package de.flojo.core.version;
 
 import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
-
 @EqualsAndHashCode
-public class PackageMetaInformation implements Serializable {
+public class PackageMetaInformation implements IPackageMetaInformation {
 	private final String groupId;
 	private final String artifactId;
-	private final PackageVersion version;
+	private final IPackageVersion version;
 
 	public PackageMetaInformation(final String groupId, final String artifactId,
-								  final PackageVersion version) {
+								  final IPackageVersion version) {
 		this.groupId = groupId;
 		this.artifactId = artifactId;
 		this.version = version;
@@ -25,7 +23,7 @@ public class PackageMetaInformation implements Serializable {
 		return artifactId;
 	}
 
-	public PackageVersion getVersion() {
+	public IPackageVersion getVersion() {
 		return version;
 	}
 

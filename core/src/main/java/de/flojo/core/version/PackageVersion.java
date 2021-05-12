@@ -1,11 +1,11 @@
 package de.flojo.core.version;
 
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-import java.io.Serializable;
-
+@ToString
 @EqualsAndHashCode
-public class PackageVersion implements Serializable {
+public class PackageVersion implements IPackageVersion {
 	private final int major;
 	private final int minor;
 	private final int patch;
@@ -46,7 +46,7 @@ public class PackageVersion implements Serializable {
 	}
 
 	@Override
-	public String toString() {
+	public String getVersionString() {
 		return "v" + major + "." + minor + "." + patch;
 	}
 }

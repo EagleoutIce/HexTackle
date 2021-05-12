@@ -26,7 +26,7 @@ public class PackageMetaInformationFilter implements IFilterInformation<PackageM
 										 data);
 	}
 
-	private boolean fuzzyMatchVersion(final PackageVersion fuzzy, final PackageVersion got) {
+	private boolean fuzzyMatchVersion(final IPackageVersion fuzzy, final IPackageVersion got) {
 		if (fuzzy == null)
 			return true;
 		final var matchesMajor = fuzzyMatchSingle(fuzzy.getMajor(), got.getMajor());

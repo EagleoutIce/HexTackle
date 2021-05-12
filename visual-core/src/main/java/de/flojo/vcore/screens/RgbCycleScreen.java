@@ -1,9 +1,11 @@
 package de.flojo.vcore.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.ScreenUtils;
+import de.flojo.core.version.IdePackageMetaInformation;
 import de.flojo.core.version.JarPackageMetaRetriever;
 import de.flojo.engine.HTScreenAdapter;
 import de.flojo.engine.IAmGameCore;
@@ -23,17 +25,19 @@ public class RgbCycleScreen extends HTScreenAdapter {
 		final var labelStyle = new Label.LabelStyle();
 		labelStyle.font = new BitmapFont();
 		labelStyle.fontColor = Color.BLACK;
-		final var version = new JarPackageMetaRetriever().getPackage("META-INF/maven/de.flojo/core/pom.properties");
-		label = new Label("Core Version" + (version.map(packageMetaInformation -> " " + packageMetaInformation.getVersion())
-												   .orElse("")), labelStyle);
-		label.setPosition(gameCore.getViewport().getWorldWidth() / 2f, gameCore.getViewport().getWorldHeight() / 2f);
+		final var version = new JarPackageMetaRetriever().getPackage("META-INF/maven/de.flojo/core/pom.properties").orElse(new IdePackageMetaInformation("de.flojo", "core"));
+		label = new Label("Core Version " + version.getVersion().getVersionString(), labelStyle);
+		centerLabel(gameCore);
 		stage.addActor(label);
+	}
+
+	private void centerLabel(final IAmGameCore gameCore) {
+		label.setPosition((gameCore.getViewport().getWorldWidth()-label.getWidth()) / 2f, (gameCore.getViewport().getWorldHeight()-label.getHeight()) / 2f);
 	}
 
 	@Override
 	public void resize(final int width, final int height) {
-		label.setPosition(getGameCore().getViewport().getWorldWidth() / 2f,
-						  getGameCore().getViewport().getWorldHeight() / 2f);
+		centerLabel(getGameCore());
 	}
 
 	@Override
@@ -43,7 +47,7 @@ public class RgbCycleScreen extends HTScreenAdapter {
 
 	@Override
 	public void render(final float delta) {
-		if (System.currentTimeMillis() - last > 25) {
+		if (System.currentTimeMillis() - last > 15) {
 			v = Math.floorMod(v + 1, 256);
 			lastColor = new HTColor(HTColor.HSBtoRGB(v / 255f, .75f, .75f));
 			last = System.currentTimeMillis();

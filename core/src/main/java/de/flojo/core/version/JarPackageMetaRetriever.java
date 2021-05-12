@@ -10,7 +10,7 @@ import java.util.Properties;
 @Slf4j
 public class JarPackageMetaRetriever implements IRetrievePackageMeta {
 	@Override
-	public Optional<PackageMetaInformation> getPackage(String from) {
+	public Optional<IPackageMetaInformation> getPackage(String from) {
 		final var properties = new Properties();
 		try {
 			properties.load(ResourceLoader.getFileInputStream(from));
