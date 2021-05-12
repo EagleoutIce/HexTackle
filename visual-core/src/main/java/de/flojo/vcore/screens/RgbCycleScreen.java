@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.ScreenUtils;
+import de.flojo.core.version.JarPackageMetaRetriever;
 import de.flojo.engine.HTScreenAdapter;
 import de.flojo.engine.IAmGameCore;
 import de.flojo.engine.color.HTColor;
@@ -22,6 +23,7 @@ public class RgbCycleScreen extends HTScreenAdapter {
 		final var labelStyle = new Label.LabelStyle();
 		labelStyle.font = new BitmapFont();
 		labelStyle.fontColor = Color.BLACK;
+		new JarPackageMetaRetriever().getPackage("META-INF/maven/de.flojo/core/pom.properties");
 		label = new Label("This is text", labelStyle);
 		label.setPosition(gameCore.getViewport().getWorldWidth() / 2f, gameCore.getViewport().getWorldHeight() / 2f);
 		stage.addActor(label);
