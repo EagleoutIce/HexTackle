@@ -88,9 +88,9 @@ public class AskForAutoUpdate {
 		dialog.hide();
 		try {
 			var downloader = updater.getDownloader(true);
-			log.info("Update to: {}", AutoUpdaterFactory.JAR_PATH);
+			log.info("Update to: {}", updater.getSourcePath());
 			// this should be buffered/changed too
-			final var target = downloader.downloadTo(Path.of(AutoUpdaterFactory.JAR_PATH));
+			final var target = downloader.downloadToParent(Path.of(updater.getSourcePath()));
 			// TODO: delete old
 			// TODO: get args
 			// TODO: use delete old arg

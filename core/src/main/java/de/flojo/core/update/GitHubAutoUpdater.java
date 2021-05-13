@@ -33,6 +33,10 @@ public class GitHubAutoUpdater extends AbstractAutoUpdater {
 														 jarPath));
 	}
 
+	public String getSourcePath() {
+		return jarPath;
+	}
+
 	private void checkForPossibleUpdate() {
 		log.debug("Started fetching.");
 		try {

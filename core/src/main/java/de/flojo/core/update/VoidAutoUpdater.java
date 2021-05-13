@@ -4,9 +4,20 @@ import de.flojo.core.update.downloaders.IDownloadUpdate;
 
 public class VoidAutoUpdater extends AbstractAutoUpdater {
 
+	private final String jarPath;
+
+	public VoidAutoUpdater(final String jarPath) {
+		this.jarPath = jarPath;
+	}
+
 	@Override
 	public void fetch() {
 		updateVersionState(NewVersionState.DISABLED);
+	}
+
+	@Override
+	public String getSourcePath() {
+		return jarPath;
 	}
 
 	@Override

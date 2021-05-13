@@ -1,12 +1,10 @@
 package de.flojo.vcore.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.ScreenUtils;
-import de.flojo.core.version.IdePackageMetaInformation;
-import de.flojo.core.version.JarPackageMetaRetriever;
+import de.flojo.core.version.ht.HtVersionRetriever;
 import de.flojo.engine.HTScreenAdapter;
 import de.flojo.engine.IAmGameCore;
 import de.flojo.engine.color.HTColor;
@@ -25,14 +23,15 @@ public class RgbCycleScreen extends HTScreenAdapter {
 		final var labelStyle = new Label.LabelStyle();
 		labelStyle.font = new BitmapFont();
 		labelStyle.fontColor = Color.BLACK;
-		final var version = new JarPackageMetaRetriever().getPackage("META-INF/maven/de.flojo/core/pom.properties").orElse(new IdePackageMetaInformation("de.flojo", "core"));
+		final var version = HtVersionRetriever.getRetriever().getMeta("core");
 		label = new Label("Core Version " + version.getVersion().getVersionString(), labelStyle);
 		centerLabel(gameCore);
 		stage.addActor(label);
 	}
 
 	private void centerLabel(final IAmGameCore gameCore) {
-		label.setPosition((gameCore.getViewport().getWorldWidth()-label.getWidth()) / 2f, (gameCore.getViewport().getWorldHeight()-label.getHeight()) / 2f);
+		label.setPosition((gameCore.getViewport().getWorldWidth() - label.getWidth()) / 2f,
+						  (gameCore.getViewport().getWorldHeight() - label.getHeight()) / 2f);
 	}
 
 	@Override

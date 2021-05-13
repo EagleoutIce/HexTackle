@@ -3,7 +3,7 @@ package de.flojo.core.version;
 import lombok.ToString;
 
 @ToString
-public class IdePackageVersion implements IPackageVersion {
+public class InternalPackageVersion implements IPackageVersion {
 	@Override
 	public String getVersionString() {
 		return "<Internal>";

@@ -19,7 +19,7 @@ public class UrlDownloader implements IDownloadUpdate {
 
 	@SneakyThrows
 	@Override
-	public Path downloadTo(final Path fullTargetPath) {
+	public Path downloadToParent(final Path fullTargetPath) {
 		final var targetParent = fullTargetPath.getParent().toString();
 		log.info("Download from: \"{}\" to: \"{}\"", source, targetParent);
 		final var basenameSource = FilenameUtils.getName(source);

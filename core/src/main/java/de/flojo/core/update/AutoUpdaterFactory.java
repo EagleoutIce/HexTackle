@@ -2,10 +2,8 @@ package de.flojo.core.update;
 
 
 import de.flojo.core.IFactory;
+import de.flojo.core.launcher.JarMetaProvider;
 import lombok.extern.slf4j.Slf4j;
-
-import java.io.File;
-import java.net.URISyntaxException;
 
 /**
  * Automatically update Java Application
@@ -13,31 +11,27 @@ import java.net.URISyntaxException;
 @Slf4j
 public class AutoUpdaterFactory implements IFactory<AbstractAutoUpdater> {
 
-	public static final String JAR_PATH;
-	private static final String JAR_END = ".jar";
-
-	static {
-		String bufferedJarPath;
-		try {
-			bufferedJarPath = new File(AutoUpdaterFactory.class.getProtectionDomain().getCodeSource().getLocation()
-															   .toURI()).getPath();
-		} catch (URISyntaxException ex) {
-			log.error("On Retrieving jar path. ", ex);
-			bufferedJarPath = "";
-		}
-		JAR_PATH = bufferedJarPath;
-	}
+	private final String usedPath;
 
 	public AutoUpdaterFactory() {
-		log.info("Using Jar-Path: {}", JAR_PATH);
+		this(JarMetaProvider.JAR_PATH);
+	}
+
+	public AutoUpdaterFactory(final String usePath) {
+		this.usedPath = usePath;
+		log.info("Using Path: {}", JarMetaProvider.JAR_PATH);
+	}
+
+	public String getUsedPath() {
+		return usedPath;
 	}
 
 	public AbstractAutoUpdater create() {
-		if (!JAR_PATH.endsWith(JAR_END)) {
+		if (!usedPath.endsWith(JarMetaProvider.JAR_SUFFIX)) {
 			log.warn("Path is not a jar file. Update-checks are disabled.");
-			return new VoidAutoUpdater();
+			return new VoidAutoUpdater(usedPath);
 		} else {
-			return new GitHubAutoUpdater(JAR_PATH);
+			return new GitHubAutoUpdater(usedPath);
 		}
 	}
 }

@@ -26,7 +26,7 @@ public class ResourceLoader {
 	 *
 	 * @return input stream if 'gettable'
 	 */
-	public static InputStream getFileInputStream(String path) {
+	public static InputStream getInternalFileInputStream(String path) {
 		log.debug("Retrieving for: {}", path);
 		return Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
 	}
@@ -44,7 +44,7 @@ public class ResourceLoader {
 	 * @throws IOException if the acquire conspire'
 	 */
 	public static <T> T getFile(String path, Function<Stream<String>, T> eater) throws IOException {
-		try (final var is = getFileInputStream(path)) {
+		try (final var is = getInternalFileInputStream(path)) {
 			// We want to get one String without nasty newlines :D
 			final var isReader = new InputStreamReader(Objects.requireNonNull(is));
 			final var bufferedReader = new BufferedReader(isReader);

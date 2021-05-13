@@ -29,6 +29,8 @@ public abstract class AbstractAutoUpdater {
 		}
 	}
 
+	public abstract String getSourcePath();
+
 	public void registerNewVersionListener(final IListenToNewVersionState listener) {
 		listeners.add(listener);
 	}

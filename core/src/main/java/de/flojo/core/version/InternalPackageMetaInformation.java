@@ -3,15 +3,15 @@ package de.flojo.core.version;
 import lombok.ToString;
 
 @ToString
-public class IdePackageMetaInformation implements IPackageMetaInformation {
+public class InternalPackageMetaInformation implements IPackageMetaInformation {
 	private final String groupId;
 	private final String artifactId;
 	private final IPackageVersion version;
 
-	public IdePackageMetaInformation(final String groupId, final String artifactId) {
+	public InternalPackageMetaInformation(final String groupId, final String artifactId) {
 		this.groupId = groupId;
 		this.artifactId = artifactId;
-		this.version = new IdePackageVersion();
+		this.version = new InternalPackageVersion();
 	}
 
 	@Override
