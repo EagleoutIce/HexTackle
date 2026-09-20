@@ -18,9 +18,9 @@
         <libgdx.version>1.10.0</libgdx.version>
         <junit.version>5.4.2</junit.version>
         <slf4j.version>1.7.30</slf4j.version>
-        <lombok.version>1.18.20</lombok.version>
+        <lombok.version>1.18.48</lombok.version>
         <githubapi.version>1.128</githubapi.version>
-        <!-->Submodule versions</!-->
+        <!-- Submodule versions -->
         <hextackle.core.version>1.0.1</hextackle.core.version>
         <hextackle.vcore.version>1.0.0</hextackle.vcore.version>
         <hextackle.engine.version>1.0.0</hextackle.engine.version>

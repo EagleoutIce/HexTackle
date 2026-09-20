@@ -10,22 +10,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
-          lfs: true
           submodules: true
 
       - name: Setup Java JDK 11
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v4
         with:
           java-version: '11'
-          java-package: jdk
-          architecture: x64
+          distribution: 'temurin'
+          cache: 'maven'
 
       - name: Build all the jars
-        run: |
-          mvn install
+        run: mvn -B install
+
       - name: Commit jar to build branch
         run: |
           git config --local user.email "action@github.com"
@@ -36,8 +38,5 @@ jobs:
           git commit -m "Update Jars by workflow"
 
       - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          branch: "build"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force: true
+        if: github.event_name == 'push'
+        run: git push --force origin HEAD:build

@@ -32,7 +32,7 @@
     </dependencies>
 
     <build>
-        <finalName>engine-${project.version}</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -40,7 +40,7 @@
                 <version>3.2.0</version>
                 <executions>
                     <execution>
-                        <id>pack-engine</id>
+                        <id>pack-visual-core</id>
                         <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
